@@ -138,6 +138,7 @@ class Mailbox:
     def _imaps_login(self):
         """Handles SSL IMAP login."""
         ssl_context_to_use = None
+
         if self.certfile and self.keyfile:
             try:
                 ssl_context_to_use = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
@@ -748,7 +749,7 @@ class Mailbox:
         """
         if not raw:
             return []
-        return [addr for _, addr in utils.getaddresses([raw])]
+        return [addr for _, addr in email.utils.getaddresses([raw])]
 
     def process_date_field(self, raw: str) -> typing.Optional[str]:
         """
@@ -771,7 +772,7 @@ class Mailbox:
         """
         if raw is None:
             return None
-        subj, enc = header.decode_header(raw)[0]
+        subj, enc = email.header.decode_header(raw)[0]
         if isinstance(subj, bytes):
             subj = subj.decode(enc or "utf-8", errors="replace")
         return subj.replace("\r", "").replace("\n", "")
