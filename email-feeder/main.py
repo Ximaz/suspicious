@@ -37,7 +37,7 @@ MAX_RETRIES = 3
 BASE_DELAY = 1  # in seconds
 
 # Default application paths and settings
-DEFAULT_CASE_BASE_PATH = Path("/tmp/icmp")
+DEFAULT_CASE_BASE_PATH = Path("/app/case")
 DEFAULT_SLEEP_INTERVAL = 10  # seconds
 
 # --- Helper Functions ---
